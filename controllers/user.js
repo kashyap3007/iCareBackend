@@ -1,37 +1,45 @@
-const User = require("../models/user");
-const Meal = require("../models/meal");
+const User = require('../models/user')
+const Meal = require('../models/meal')
 
 exports.getUserById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
     if (err || !user) {
       return res.status(400).json({
-        error: "No user was found in DB"
-      });
+        error: 'No user was found in DB'
+      })
     }
-    req.profile = user;
-    next();
-  });
-};
-
+    req.profile = user
+    next()
+  })
+}
 
 exports.getUser = (req, res) => {
-  console.log("Get user")
-  req.profile.salt = undefined;
-  req.profile.encry_password = undefined;
+  console.log('Get user')
+  req.profile.salt = undefined
+  req.profile.encry_password = undefined
   console.log(req.profile)
-  return res.json(req.profile);
-};
+  return res.json(req.profile)
+}
 
 exports.getAllUser = (req, res) => {
-  User.find({}).select({username:1, firstname:1, lastname:1, email:1, phone:1, calories_per_day:1}).lean()
-    .then(data => {
-      console.log(data);
-      res.json(data);
+  User.find({})
+    .select({
+      username: 1,
+      firstname: 1,
+      lastname: 1,
+      email: 1,
+      phone: 1,
+      calories_per_day: 1
     })
-    .catch(err => {
+    .lean()
+    .then((data) => {
+      console.log(data)
+      res.json(data)
+    })
+    .catch((err) => {
       console.log(err)
       res.status(400).json({
-        error : err
+        error: err
       })
     })
 }
@@ -44,18 +52,45 @@ exports.updateUser = (req, res) => {
     (err, user) => {
       if (err) {
         return res.status(400).json({
-          error: "You are not authorized to update this user"
-        });
+          error: 'You are not authorized to update this user'
+        })
       }
-      user.salt = undefined;
-      user.encry_password = undefined;
-      res.json(user);
+      user.salt = undefined
+      user.encry_password = undefined
+      res.json(user)
     }
-  );
-};
-
-
-
+  )
+}
+exports.updateCalorie = async (req, res, next) => {
+  try {
+    const { limit, user } = req.body
+    const data = await User.findByIdAndUpdate(
+      user._id,
+      {
+        calories_per_day: limit,
+        calorie_time: Date.now()
+      },
+      { new: true, useFindAndModify: false }
+    )
+    const { _id, name, email, username, role, calories_per_day, calorie_time } =
+      data
+    return res.json({
+      user: {
+        _id,
+        email,
+        name,
+        username,
+        role,
+        calories_per_day,
+        calorie_time
+      }
+    })
+  } catch (err) {
+    return res.status(400).json({
+      error: err
+    })
+  }
+}
 
 // *******************************    For Admin *********************************
 /*
@@ -65,23 +100,22 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
   console.log('deleteUser')
 
-  const username = req.params.username;
+  const username = req.params.username
 
-  User.findOneAndDelete({username}, function (err, docs) { 
-      if(err || !docs) {
-        return res.status(400).json({err : "Unable to delete " + username})
+  User.findOneAndDelete({ username }, function (err, docs) {
+    if (err || !docs) {
+      return res.status(400).json({ err: 'Unable to delete ' + username })
+    }
+
+    //Update Meal collection
+    Meal.deleteMany({ username: username }, (erro, meal) => {
+      if (erro || !meal) {
+        return res.status(400).json({ erro: 'Unable to delete ' + username })
       }
-
-      //Update Meal collection
-      Meal.deleteMany({username : username}, (erro, meal) => {
-        if(erro || !meal) {
-          return res.status(400).json({erro : "Unable to delete " + username})
-        }
-        res.json({"Success" : username + " Deleted Successfully"})
-      })
-  });
+      res.json({ Success: username + ' Deleted Successfully' })
+    })
+  })
 }
-
 
 // exports.userPurchaseList = (req, res) => {
 //   Order.find({ user: req.profile._id })
