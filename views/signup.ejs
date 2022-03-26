@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/signup.css">
+    <title>Fitbit</title>
+</head>
+
+<body style="background-color: #478">
+    <div>
+        <form method="POST" action="/api/signup">
+            <h4 class="text-warning text-center pt-5">Registration</h4>
+            <!-- USRENAME -->
+
+            <div style="color: red">
+              <% if(error) { %> <%= error %> <% } %>
+            </div>
+
+            
+            <label>
+                <input type="text" class="input" name="username" placeholder="ENTER USERNAME" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- FIRSTNAME -->
+            <label>
+                <input type="text" class="input" name="firstname" placeholder="ENTER FIRSTNAME" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- LASTNAME -->
+            <label>
+                <input type="text" class="input" name="lastname" placeholder="ENTER LASTNAME" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- EMAIL -->
+            <label>
+                <input type="email" class="input" name="email" placeholder="ENTER EMAIL" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- PHONE -->
+            <label>
+                <input type="tel" class="input" name="phone" placeholder="ENTER PHONE" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- PASSWORD -->
+            <label>
+                <input type="password" class="input" name="password" placeholder="ENTER PASSWORD" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- PASSWORD -->
+            <label>
+                <input type="Number" class="input" name="calories_per_day" placeholder="ENTER CALORIES PER DAY" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            
+            <button type="submit">submit</button><br><br><br>
+            <a href="/api/signin" style="text-decoration: none">Already Have an account ? </a>
+        </form>
+    </div>
+</body>
+
+</html>

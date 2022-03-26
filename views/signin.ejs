@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/signin.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+
+
+    <title>Fitbit</title>
+</head>
+
+<body style="background-color: #478">
+    <form action="/api/signin" method="post">
+        <h4 class="text-warning text-center pt-5">Login</h4>
+
+        <div style="color: red">
+          <% if(error) { %> <%= error %> <% } %>
+        </div>
+
+        <label>
+            <input type="email" class="input" name="email" placeholder="ENTER EMAIL" />
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <input type="password" class="input" name="password" placeholder="ENTER PASSWORD" />
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <button type="submit">submit</button><br><br><br>
+        <a href="/api/signup" style="text-decoration: none">Don't have an account ? </a>
+    </form>
+</body>
+
+</html>

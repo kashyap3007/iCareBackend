@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/signup.css">
+    <title>Fitbit</title>
+</head>
+
+<body style="background-color: #478">
+    <div>
+        <form method="POST" action="/api/signup">
+            <h4 class="text-warning text-center pt-5">Update Profile</h4>
+            <!-- USRENAME -->
+
+            <div style="color: red">
+              <% if(error) { %> <%= error %> <% } %>
+            </div>
+
+            <!-- FIRSTNAME -->
+            <label>
+                <input type="text" class="input" name="firstname" placeholder="ENTER FIRSTNAME" value="demo" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- LASTNAME -->
+            <label>
+                <input type="text" class="input" name="lastname" placeholder="ENTER LASTNAME" value="demo" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- EMAIL -->
+            <label>
+                <input type="email" class="input" name="email" placeholder="ENTER EMAIL" value="demo" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- PHONE -->
+            <label>
+                <input type="tel" class="input" name="phone" placeholder="ENTER PHONE" value="demo" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- CAlories -->
+            <label>
+                <input type="Number" class="input" name="calories_per_day" placeholder="ENTER CALORIES PER DAY" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            
+            <button type="submit">Update</button><br><br><br>
+        </form>
+    </div>
+</body>
+
+</html>

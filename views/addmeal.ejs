@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/signup.css">
+    <title>Fitbit</title>
+</head>
+
+<body style="background-color: #478">
+    <div>
+        <form method="POST" action="/api/signup">
+            <h4 class="text-warning text-center pt-5">ADD MEAL</h4>
+            <!-- USRENAME -->
+
+            <div style="color: red">
+              <% if(error) { %> <%= error %> <% } %>
+            </div>
+
+            <!-- FOODNAME -->
+            <label>
+                <input type="text" class="input" name="foodname" placeholder="ENTER FOODNAME" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- LASTNAME -->
+            <label>
+                <input type="text" class="input" name="description" placeholder="ENTER DESCRIPTION" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            <!-- CAlories -->
+            <label>
+                <input type="Number" class="input" name="calorie" placeholder="ENTER CALORIES" required />
+                <div class="line-box"><div class="line"></div></div>
+            </label>
+            
+            <button type="submit">ADD MEAL</button><br><br><br>
+        </form>
+    </div>
+</body>
+
+</html>
