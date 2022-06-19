@@ -43,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //My Routes
+app.get("/demo")  
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", mealRoutes);
